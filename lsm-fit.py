@@ -27,18 +27,25 @@ b[0] = np.sum( x*fx )
 b[1] = np.sum( fx )
 
 xv = np.matmul( np.linalg.inv(A), b )
+#xv2 = np.dot(np.linalg.inv(A), b)
 
 print(xv)
+#print(xv2)
 
 fdash = xv[0]*x + xv[1]
 print(x)
 print(fdash)
+
+coef = np.polyfit(x, fx, 4)
+fpoly = coef[0]*x**4 + coef[1]*x**3 + coef[2]*x**2 \
+        + coef[3]*x + coef[4]
 
 
 
 plt.axis([3.0, 9.0, -2.0, 40.0] )
 plt.plot(x,fx, 'bo')
 plt.plot(x,fdash, 'k-')
+plt.plot(x,fpoly, 'b-')
 plt.xlabel('x')
 plt.ylabel( 'f(x)' )
 plt.show()
