@@ -1,6 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#Changing the default size
+fig_size = plt.rcParams["figure.figsize"]
+fig_size[0] = 20
+fig_size[1] = 16
+plt.rcParams["figure.figsize"] = fig_size
+
 imax = 1001
 dx = 10.0/(imax-1)
 u = np.ndarray((imax),dtype=np.float64)
