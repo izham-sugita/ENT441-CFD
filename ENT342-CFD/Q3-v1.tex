@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%
+%%% QUESTION 3 %%%
+%%%%%%%%%%%%%%%%%%
+%TODO Question3
+%\clearpage		% page break
+\question{}\label{q3}
+%\partQuestion{}
+
+The one-dimensional linear advection equation is the canonical example of transport phenomena. The equation is an excellent model equation to test the behavior of numerical method. The equation is given as below.  
+	
+	\translation{Bahasa Melayu}
+	
+	\begin{equation}
+	\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0, \quad c > 0 \nonumber
+	\end{equation}		
+
+\listbeginx	% start 1st level question			
+
+    \item \label{q3a} Construct the discrete equation of the linear advection equation using finite volume method. Use Euler time integration for temporal term and equally spaced control volume for the spatial term. Take flux approximation at the cell interface as the average value of neighboring cells.
+	
+	\translation{Binakan persamaan diskrit untuk persamaan adveksi linear menggunakan kaedah isipadu terhingga. Gunakan integrasi Euler untuk terma masa dan gunakan isipadu kawalan yang bersamaan saiznya untuk terma ruang. Ambilkan nilai purata antara sel yang berjiran untuk penghampiran flux di permukaan sel.}
+
+	\qmarks{10}
+		
+	\item \label{q3b} From the discrete equation in Q\ref{q3}\ref{q3a}, derive the numerical stability condition using complex Fourier analysis.   
+	
+	\translation{Daripada persamaan diskrit Q\ref{q3}\ref{q3a}, terbitkan syarat kestabilan berangka menggunakan analysis kompleks Fourier }
+
+	\qmarks{10}
+		
+	\item What is the conclusion from Q\ref{q3}\ref{q3b}? Is the method stable? Propose a solution if the method is not stable.   
+	
+	\translation{Apakah kesimpulan daripada Q\ref{q3}\ref{q3b}? Adakah kaedah ini stabil? Cadangkan satu solusi jika kaedah ini tidak stabil.}
+
+	\qmarks{5}
+
+\listclose	% close 1st level question

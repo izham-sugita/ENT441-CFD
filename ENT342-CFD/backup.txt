@@ -1,0 +1,12 @@
+\item You are given a task to design a capacitive sensor that is able to pass sound frequencies above 25 Hz. For a 1.5 $cm^2$ capacitance sensor, $R$ is 10~\si{\mega\ohm}. (Relative Permitivity $= 8.8854 \times~10^{-12}$)
+	
+	\translation{Anda diberikan tugasan untuk mereka bentuk penderia kapasitan yang mampu membenarkan frekuensi bunyi lebih 25~Hz. Untuk 1.5~$cm^2$ penderia kapasitan, R adalah \emph{10~\si{\mega\ohm}}. Ketelusan relatif $= 8.854 \times 10^{-12}$,}
+	
+	\begin{figure}[H] % H means, to put figure here after the code
+		\centering
+		%\includegraphics[width=0.5\textwidth]{testfig}
+		\includegraphics{diffamp}
+		\caption{\rajah}
+		\label{fig:diffamp}
+	\end{figure}
+

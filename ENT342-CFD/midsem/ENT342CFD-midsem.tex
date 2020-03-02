@@ -1,0 +1,133 @@
+%% This document shows an example of writing exam paper in a single file.
+%%
+\documentclass[12pt]{article}
+%\usepackage{finalxm}			% usually final exam. solid hours without minutes
+\usepackage[minutes]{finalxm}	% show hours & minutes
+%\usepackage[answers]{finalxm}	% answer scheme
+%\usepackage{pdflscape}	% for landscape layout on specific page 
+
+\usepackage{lipsum}
+
+\usepackage{amsmath}
+\usepackage{amssymb}% for \mathbb
+
+%\usepackage{mathptmx}
+%\usepackage{mathpazo}
+
+
+% Declare graphics path 
+ \graphicspath{{./Figures/}}	% a subfolder named figs
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PERSONALIZED STYLES %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% WITH CAPTION %%
+%% Options availabe for caption. put these before begin{figure/table}
+%% font, labelfont, textfont || use either bf, normalfont
+%% labelsep || use either newline, colon
+%\captionsetup[figure]{labelsep=newline, font=normalfont} 	% all bold
+%\captionsetup[table]{labelsep=newline, font=normalfont}	% all bold
+%\captionsetup[figure]{labelsep=colon} 	% all bold
+%\captionsetup[table]{labelsep=colon}	% all bold
+%\captionsetup[figure]{labelsep=colon, textfont=normalfont} 	% bold Figure
+%\captionsetup[table]{labelsep=colon, textfont=normalfont} 	% bold Table
+%\captionsetup[figure]{labelsep=colon, font=normalfont} 	% all no bold 
+%\captionsetup[table]{labelsep=colon, font=normalfont} 	% all no bold 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SETUP TITLE PAGE %%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\mtefe{Pertengahan} 			% Akhir, Pertengahan 
+\semester{Kedua}		% Pertama, Kedua
+\sidang{2018/2019}		
+\examMonthYear{Oktober 2019}
+\courseCode{ENT342}
+\courseNameEn{Computational Fluid Dynamics}
+\courseNameBM{Pengiraan Dinamik Bendalir}
+\pagesbm{TIGA PULUH SATU}	% used if the number of pages exceeds 30
+\durationhr{1 Jam 30 minit}		% duration of exam
+\makeatletter 
+%\if@minutes
+%	\durationmin{30 Minit}	% MUST be enabled using \usepackage[minutes]{finalxm}
+%\fi 		
+\makeatother		
+
+%test
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\begin{document}
+\makecover	% make cover/title page
+
+\instructionen{
+This question paper has \textbf{TWO (2)} questions. Answer \textbf{ALL} of the questions. Each question contributes 25 marks.}
+\instructionbm{Kertas soalan ini mengandungi \textbf{DUA (2)} soalan. Jawab \textbf{semua} soalan. Markah bagi setiap soalan adalah 25 markah.}
+
+%Note: Some tables and equations are given in the Appendix
+%[Nota : Beberapa jadual dan persamaan diberikan dalam Lampiran]
+
+% Delete from here if require no extra notes 
+%\vskip 3em
+%\instructionen{
+%	Note: Tables and equations are given in the Appendix.%
+%}
+%\instructionbm{%
+%	Nota: Jadual dan persamaan diberi dalam Lampiran.%
+%}
+% Delete until here if require no extra notes 
+
+\makecoverend	% end cover/title page
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% MAIN BODY START HERE %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setmainstyle
+\vskip -2em		% adjust vertical space skip accordingly 
+
+%%%%%%%%%%%%%
+%%% PART  %%%
+%%%%%%%%%%%%%
+%\textbf{Answer all questions} 
+%
+%\translationbf{Jawab semua soalan}
+%\bigskip
+% \newparten{Answer all questions}
+
+%\newpartbm{Jawab semua soalan}
+
+
+%%%%%%%%%%%%%%%%%%
+%%% QUESTION 1 %%%
+%%%%%%%%%%%%%%%%%%
+%TODO Question1
+ \bigskip 
+%\partQuestion{[CO1, PO1]}
+
+\input{mid-Q1}
+\clearpage
+%\nextpage
+
+\input{mid-Q2}
+
+
+%TODO PART B
+%\clearpage
+%\newpartenx{Answer TWO (2) questions ONLY}
+
+%\newpartbm{Jawab DUA (2) soalan SAHAJA}
+%\bigskip 
+
+%\question{}
+%\partQuestion{}
+
+%\input{Q5-v2}
+
+
+\paperend 
+
+%\clearpage
+
+%\paperend %<- included in Q6.tex
+%\input{appendix}
+
+\end{document}

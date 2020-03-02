@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%
+%%% QUESTION 5 %%%
+%%%%%%%%%%%%%%%%%%
+%TODO Question5
+% \clearpage		% page break
+\question{} \label{q5}
+%\partQuestion{}
+
+	The time-dependent one-dimensional heat equation is a second-order partial differential equation. The second-order term infers that the solution propagation will be restricted to the order of $O$ $(1/\Delta h^{2})$, where $\Delta h$ is the mesh spacing. This put a severe stability restriction to explicit numerical scheme when solving this equation. Answer the questions referring to the time-dependent one-dimensional heat equation below.
+	
+	\translation{Persamaan haba satu-dimensi bersandar masa merupakan persamaan kebezaan separa darjah kedua. Terma darjah kedua bererti propagasi solusi disekat pada darjah $\mathcal{O}(1/\Delta h^{2})$, dimana $\Delta h$ adalah jarak antara grid. Ini menyebabkan penyekatan syarat kestabilan yang teruk bagi kaedah berangka tersurat ketika menyelesaikan persamaan ini. Jawab soalan-soalan berkaitan dengan persamaan haba satu-dimensi bersandar masa dibawah.}
+
+\begin{equation}
+\frac{\partial T}{\partial t} = \kappa \left( \frac{\partial^2 T}{\partial x^2} \right) \nonumber
+\end{equation}		
+		
+		\listbeginx
+
+\item \label{q5a} Construct the discretized equation for the heat equation using \textit{forward} Euler time integration and centered difference scheme for the spatial term. Analyze the discrete equation to derive the numerical stability condition.
+
+\translation {Bina persamaan diskrit untuk persamaan haba itu menggunakan kaedah integrasi masa Euler kehadapan dan kaedah pembezaan pertengahan untuk terma ruang. Analisakan persamaan diskrit itu untuk menerbitkan syarat kestabilan berangka.}
+		
+\qmarks{10}
+
+\item \label{q5b} From the discrete equation obtained in Q\ref{q5}\ref{q5a} the time integration scheme can be modified by setting the time step forward or backward. Answer the questions below regarding backward time step method.     
+
+\translation{Daripada persamaan diskrit yang diperolehi oleh Q\ref{q5}\ref{q5a} kaedah integrasi masa boleh diubahsuai dengan menetapkan langkah masa kehadapan atau mundur. Jawab soalan-soalan dibawah berkenaan kaedah mundur langkah masa.}
+
+\listbegin
+\item Apply the \textit{backward} Euler time integration to the discrete equation obtained in Q\ref{q5}\ref{q5a} and rearrange the equation.
+
+\translation{Applikasikan kaedah integrasi masa mundur Euler keatas persamaan diskrit yang diperolehi daripada Q\ref{q5}\ref{q5a} dan susun semula persamaan itu.}
+
+\qmarks{5}
+
+\item Analyze the stability condition for the backward Euler time integration.
+
+\translation{Analisakan syarat kestabilan kaedah integrasi masa mundur Euler.}
+
+\qmarks{5}
+
+\listclose
+
+	
+	\item The discrete equation from Q\ref{q5}\ref{q5b} contains more unknown at the next time step than at the previous time step. This condition necessitates the construction of simultaneous linear equations. Construct the matrix-vector form for the simultaneous linear equations.  
+	
+	\translation{Persamaan diskrit daripada Q\ref{q5}\ref{q5b} mengandungi lebih banyak terma di masa seterusnya daripada masa sebelumnya. Keadaan ini memerlukan pembinaan persamaan linear serentak. Bina persamaan linear serentak itu dalam bentuk matriks-vektor.}
+
+	\qmarks{5}
+
+
+
+\listclose	% close 1st level question

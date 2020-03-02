@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%
+%%% QUESTION 2 %%%
+%%%%%%%%%%%%%%%%%%
+%TODO Question2
+\clearpage		% page break
+\question{}
+%\partQuestion{}
+
+The Marker-and-Cell (MAC) algorithm belongs to a group of solution algorithm called \textit{pressure correction} method for incompressible Navier-Stokes equations. The incompressible Navier-Stokes equations are given below in differential form where $\textbf{u}$, p and $\nu$ are velocity vector, pressure and dynamic viscosity coefficient, respectively. The MAC algorithm closes the system equations by using the mass conservation equation or divergence equation to link the pressure with velocity gradients. Answer the questions below regarding the MAC algorithm.   
+
+\translation{Algoritma Penanda-dan-Sel (MAC) termasuk didalam satu kumpulan algoritma solusi yang dipanggil kaedah \textit{pembetulan tekanan} untuk persamaan tidak mampat Navier-Stokes. Persamaan tidak mampat Navier-Stokes diberikan seperti dibawah dimana $\textbf{u}$, p dan $\nu$ masing-masing adalah vektor halaju, tekanan dan pekali kelikatan dinamik. Algoritma MAC menutup sistem persamaan ini dengan menggunakan persamaan keabadian jisim atau persamaan mencapah yang dikaitkan dengan tekanan dan kecerunan halaju. Jawab soalan-soalan dibawah berkenaan algoritma MAC}
+
+\begin{subequations}
+\begin{align}
+\nabla \cdot \textbf{u} &= 0 \nonumber  \\ \nonumber
+\frac{\partial \textbf{u}}{\partial t} + \textbf{u} \cdot \nabla \textbf{u}  &= -\nabla p + \nu \nabla^2 \textbf{u},
+\end{align}
+\end{subequations}
+
+\listbeginx	% start 1st level question
+	\item Explain the step-by-step of MAC algorithm using the incompressible Navier-Stokes equations given. Give the supporting mathematical argument for each step.  	
+	
+	\translation{Terangkan langkah-langkah penyelesaian persamaan tidak mampat Navier-Stokes menggunakan algoritma MAC. Berikan sokongan matematik bagi setiap langkah-langkah tersebut.}
+	
+		
+		\qmarks{10}
+	
+%	\nextpage 
+%	\clearpage 
+	
+	\item The staggered grid configuration is very effective in removing checkered pressure field solution. For this reason, the MAC algorithm applied the staggered grid configuration in its early inception. Construct the staggered grid configuration for two-dimensional structure and propose how to discretize the differential terms $\frac{\partial u}{\partial x}$, $\frac{\partial u}{\partial y}$ and $\frac{\partial p}{\partial x}$ for the given grid.       
+
+	\translation{Konfigurasi grid tidak serentak sangat berkesan untuk menyahkan solusi medan tekanan berkotak. Oleh sebab itu, pada awal-awalnya algoritma MAC telah menggunakan konfigurasi grid tidak serentak ini. Binakan grid tidak serentak untuk struktur dua dimensi dan berikan cadangan bagaimana terma-terma pembezaan $\frac{\partial u}{\partial x}$, $\frac{\partial u}{\partial y}$ dan $\frac{\partial p}{\partial x}$ boleh didiskretkan untuk grid tersebut.}
+	
+
+\qmarks{10}	
+	
+
+\item Can the checkered pressure field solution be avoided using normal grid? Analyze the problem to determine the cause.
+	
+	\translation{Bolehkah penyelesaian medan tekan berpetak dielak menggunakan grid normal? Analisa masalah itu untuk menentukan puncanya.}
+
+\qmarks{5}
+
+
+
+\listclose	% close 1st level question

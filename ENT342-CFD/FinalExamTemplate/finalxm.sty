@@ -1,0 +1,476 @@
+%%
+%% This is file `finalxm.sty',
+%%
+%% created by
+%% Mohd Hanafi Mat Som
+%% PPK Mekatronik, Universiti Malaysia Perlis
+%% msmhanafi [at] gmail.com
+%%
+\NeedsTeXFormat{LaTeX2e}[1995/06/01]
+\ProvidesPackage{finalxm}
+          [2018/04/06 v2.2] 
+%% v1.1 use package zref-lastpage & fmtcount to automatically convert number to string (in english) in cover page. 
+%% v1.2 use xstring package to substitute number to string (in malay) in title/cover page
+%% v1.3 added command \figurebm & \tablebm caption in bm for figure & table
+%% omit a few packages from the .sty file and must be declared in .tex file
+% float, pdflscape, amsmath,amssymb. 
+%% v1.4 added ANSWER SCHEME on the cover page if the "answer" option is selected.
+% edit command \answer and omit command \answerend 
+%% v1.5 add parsep=0pt to listbegin(x) & add space above using captionsetup 
+%% v1.6 fixed fancyheader warning by setting headheight to \setlength{\headheight}{45pt}
+% fixed top and bottom margin by introducing footskip
+% fixed problem with the size of text when bold/italic by redefining \fontsize{10pt}{\baselineskip}\selectfont
+% add inputenc,latexsym, booktabs packages
+% reinclude the packages omitted from ver1.3 except landscape. 
+%% v1.7 set \nextpage command automatically executed at each page break
+%% v1.8 add new package(cleveref) for better figure,table cross ref.
+%% update coverpage according to standard set by BPA.
+%% v1.9 renewcommand newparten, newpartenx, translation, & add newcommand translationbf
+%% v2.0 include framed package and a lot of new commands. \makecoverend, \newpartbmx, \figurebm, \figurecaption, \tablecaption, \jadualbf, \arraystretch{value}, \figuretablenumnopart, \figuretablenum, \parten, \partbm, \question{}, \question{[CO1, PO1]}, \partQuestion{}, \partQuestion{[CO1, PO1]}
+%% v2.1 make options for standard, ppkas, ppkb. Make a switch for figure/table numbering to include part & question. 
+%% v2.2 redefine \question{} and \partQuestion{} to include label for \ref. added xparse package. adjust enumerate itemsep=1pc. 
+%%
+%\RequirePackage[malay]{babel}
+%\RequirePackage{translations}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{mathptmx}	% closest to times new roman
+\RequirePackage{latexsym, amsmath, amssymb, textcomp} % typesetting mathematical symbols, formulae and equations.
+\RequirePackage{siunitx}
+\RequirePackage[a4paper, top=2.3cm, left=2.54cm, right=2.54cm, bottom=3.67cm,nofoot]{geometry} %, footskip=0.6cm
+\RequirePackage{fancyhdr}	% header
+\RequirePackage{enumitem}	% enumerate questions
+\RequirePackage{fmtcount, zref-lastpage} % for page number
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{graphicx, caption, epstopdf}
+\RequirePackage{float}	% for figure
+\RequirePackage{booktabs}	% for table
+\RequirePackage{tabularx}
+\RequirePackage[bookmarksopen=true]{hyperref}
+\RequirePackage[capitalize, nameinlink]{cleveref}
+\RequirePackage{framed}	
+\RequirePackage{xparse}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO ERROR MESSAGES %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%\tolerance=1
+%\hbadness=10000
+%\binoppenalty=\maxdimen 
+%\relpenalty=\maxdimen
+\hyphenpenalty=10000
+\emergencystretch=\maxdimen
+
+%%%%%%%%%%%%%%%%
+% TODO HEADER %%
+%%%%%%%%%%%%%%%%
+% set the header and footer
+\fancypagestyle{main}{
+	% set default header
+	\pagestyle{fancy}	 
+	\fancyhf{}
+	\fancyfoot[R]{{%
+			\ifnum\value{page}=\thelastpage \mbox{ } \\[1.5\baselineskip]  
+			\textbf{SULIT}\else
+			\nextpage \\[\baselineskip] \textbf{SULIT}\fi}}
+	\lhead{\textbf{SULIT}\\}
+	\rhead{(\textbf{\@courseCode})}
+	\fancyhead[C]{\raisebox{-2ex}{-\thepage-}}
+	\renewcommand{\headrulewidth}{0pt}
+	\setlength{\headheight}{45pt}
+}
+% set title page header 
+\fancypagestyle{titlestyle}{
+	\pagestyle{fancy}		
+	\fancyhf{}
+	\rfoot{\textbf{SULIT}}
+	\lhead{\textbf{SULIT} \\}
+	\renewcommand{\headrulewidth}{0pt}
+	\setlength{\headheight}{45pt}
+}
+% set header for main document
+\newcommand{\setmainstyle}{
+	\pagestyle{main}
+	\vspace*{1mm}
+	\setcounter{page}{2} 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO OPTIONS DECLARATION %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% answer scheme option
+\newif\if@answer 
+\DeclareOption{answers}{\@answertrue}
+\DeclareOption{noanswers}{\@answerfalse}
+
+% turn on minutes
+\newif\if@minutes 
+\DeclareOption{minutes}{\@minutestrue}
+\DeclareOption{hours}{\@minutesfalse}
+
+\newif\if@standard
+\DeclareOption{standard}{\@standardtrue}
+ 
+% turn on ppkas
+\newif\if@ppkas
+\DeclareOption{ppkas}{\@ppkastrue}
+
+% turn on ppkb
+\newif\if@ppkb
+\DeclareOption{ppkb}{\@ppkbtrue}
+
+% turn on include question number in figure/table
+\newif\if@ftquestionnum
+\DeclareOption{ftquestionnum}{\@ftquestionnumtrue}
+
+\newif\if@ftquestionnumx
+\DeclareOption{ftquestionnumx}{\@ftquestionnumxtrue}
+
+%% Process Options
+\ExecuteOptions{standard,noanswer,hours}	% set default
+\ProcessOptions
+
+%%%%%%%%%%%%%%%%%%%%%%
+% TODO COUNTER SETUP %
+%%%%%%%%%%%%%%%%%%%%%%
+% setting new counter
+\newcounter{counterpart} 
+\newcounter{counterquestion}
+
+%%%%%%%%%%%%%%%%%%%%%
+% TODO FIGURE TABLE %
+%%%%%%%%%%%%%%%%%%%%%
+%% declare figure extension
+\DeclareGraphicsExtensions{.jpg,.png,.eps,.pdf}
+
+%% declare figure/table numbering
+\newcommand{\figuretablenumnopart}{
+	\numberwithin{figure}{counterquestion}	% Figure 1.1
+	\numberwithin{table}{counterquestion}	% Table 1.1
+}
+\newcommand{\figuretablenum}{ % Figure/Table A1.1	
+	\@addtoreset{figure}{counterquestion}
+	\@addtoreset{table}{counterquestion}
+	\renewcommand\thefigure{\Alph{counterpart}\thecounterquestion.\arabic{figure}}
+	\renewcommand\thetable{\Alph{counterpart}\thecounterquestion.\arabic{table}}
+}
+
+%% declare caption
+%\renewcommand{\fnum@figure}{%
+%	\figurename~\thefigure \\%
+%	\translation{Gambarajah~\thefigure}}
+\newcommand{\figurebm}{Rajah}
+\newcommand{\rajah}{
+	\translation{\figurebm~\thefigure}}
+\newcommand{\figurecaption}[2][]{
+	\translation{\figurebm~\thefigure #1: #2}}
+\newcommand{\jadualbf}{%
+	\textbf{Jadual~\thetable}}
+\newcommand{\jadual}{
+	\translation{Jadual~\thetable}}
+\newcommand{\tablecaption}[2][Jadual \thetable]{
+	\translation{#1: #2}}
+%
+\if@standard
+	\captionsetup[figure]{labelsep=newline, font=bf, aboveskip=\baselineskip}
+	\captionsetup[table]{labelsep=newline, font=bf, position=top}
+\fi 
+%
+\if@ppkas
+	\captionsetup[figure]{labelsep=newline, font=normalfont} 	% all bold
+	\captionsetup[table]{labelsep=colon, font=normalfont, position=top} 	% all no bold 
+\fi 
+%
+\if@ppkb
+	\captionsetup[figure]{labelsep=newline, font=bf, aboveskip=\baselineskip}
+	\captionsetup[table]{labelsep=colon, font=bf, position=top}
+\fi 
+%
+\if@ftquestionnumx
+	\figuretablenumnopart
+\fi 
+\if@ftquestionnum
+	\figuretablenum
+\fi 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%TODO CROSS-REFERENCE %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%\crefdefaultlabelformat{#2\textbf{#1}#3} % boldface only the number
+%% BOLD %% need to use star cref* or Cref*
+%\crefdefaultlabelformat{\textbf{#2#1#3}}
+%\crefname{figure}{\textbf{Figure}}{\textbf{Figures}}
+%\Crefname{figure}{\textbf{Rajah}}{\textbf{Rajah}}
+%\crefname{table}{\textbf{Table}}{\textbf{Tables}}
+%\Crefname{table}{\textbf{Jadual}}{\textbf{Jadual}}
+%% NO-BOLD
+\crefdefaultlabelformat{#2#1#3}
+\crefname{figure}{Figure}{Figures}
+\Crefname{figure}{Rajah}{Rajah}
+\crefname{table}{Table}{Tables}
+\Crefname{table}{Jadual}{Jadual}
+%
+%%%%%%%%%%%%%%%%%%
+% TODO BODY TEXT %
+%%%%%%%%%%%%%%%%%%
+
+% set no paragraph indentation for the whole document
+\setlength\parindent{0pt}
+%\setlength\parskip{1em}
+
+% setting part section
+\newcommand{\parten}{Part}
+\newcommand{\partbm}{Bahagian}
+
+\if@ppkas
+	\renewcommand{\parten}{Section}
+\fi 
+
+% initiate new part in english
+\newcommand{\newparten}[1]{%	 	
+	\stepcounter{counterpart}%
+	\setcounter{counterquestion}{0}%
+	\textbf{\parten~\Alph{counterpart}: #1}
+}
+% initiate new part in english without resetting the question counter
+\newcommand{\newpartenx}[1]{%	 	
+	\stepcounter{counterpart}%
+	\textbf{\parten~\Alph{counterpart}: #1}
+}
+% initiate new part in malay
+\newcommand{\newpartbm}[1]{%	 	
+	\translation{\textbf{\partbm~\Alph{counterpart}: #1}}
+}
+\newcommand{\newpartbmx}[1]{%
+	\emph{\fontsize{10pt}{\baselineskip}\selectfont\partbm~\Alph{counterpart}: #1}}
+%
+%% setting the command question %%
+% use xparse package
+\NewDocumentCommand{\question}{O{}mo}{%
+	\IfNoValueTF{#3}
+	{\stepcounter{counterquestion}{\textbf{Question~\thecounterquestion~#2} \\
+			\textbf{\emph{\fontsize{10pt}{\baselineskip}\selectfont [Soalan~\thecounterquestion]}} 			
+		\bigskip}
+		\def\@currentlabel{\thecounterquestion}%
+		\phantomsection#1%
+	}
+	{\stepcounter{counterquestion}{\textbf{Question~\thecounterquestion~#2 \\
+			\textbf{\emph{\fontsize{10pt}{\baselineskip}\selectfont [Soalan~\thecounterquestion]}} 			
+			\bigskip}
+		\def\@currentlabel{\thecounterquestion}%
+		\phantomsection#3}%
+	}
+}
+%
+%% setting the command question. used together with \newparten
+\NewDocumentCommand{\partQuestion}{O{}mo}{%
+	\IfNoValueTF{#3}
+	{\stepcounter{counterquestion}
+		{\textbf{Question~\Alph{counterpart}\thecounterquestion~#2} \\
+			\textbf{\emph{\fontsize{10pt}{\baselineskip}\selectfont [Soalan~\Alph{counterpart}\thecounterquestion]}} 			
+			\bigskip}
+		\def\@currentlabel{\thecounterquestion}%
+		\phantomsection#1%
+	}
+	{\stepcounter{counterquestion}{\textbf{Question~\thecounterquestion~#2 \\
+				\textbf{\emph{\fontsize{10pt}{\baselineskip}\selectfont [Soalan~\thecounterquestion]}} 			
+				\bigskip}
+			\def\@currentlabel{\thecounterquestion}%
+			\phantomsection#3}%
+	}
+}
+%
+% setting the command translation
+\newcommand{\translation}[1]{%
+	\emph{\fontsize{10pt}{\baselineskip}\selectfont [#1]}
+}
+\newcommand{\translationbf}[1]{%
+	\emph{\fontsize{10pt}{\baselineskip}\selectfont [\textbf{#1}]}
+}
+% setting for marks
+\newcommand{\qmarks}[1]{
+	\mbox{}\hfill (#1 Marks /\emph{\fontsize{10pt}{\baselineskip}\selectfont Markah})
+}
+% setting for answer 
+\newcommand{\answer}[1]{
+	\begin{footnotesize}
+		\color{blue}
+		\if@answer
+			\textbf{[ANSWER]} \\#1
+		\fi 
+	\end{footnotesize}
+}
+% set instruction in english
+\newcommand{\instructionen}[1]{
+	#1\\	
+}
+% set instruction in malay
+\newcommand{\instructionbm}[1]{
+	\translation{#1}
+}
+
+\newcommand{\makecoverend}{
+	\clearpage
+	\restoregeometry 
+}
+%%%%%%%%%%%%%%%%%%%%%
+%TODO ORDERED LIST %%
+%%%%%%%%%%%%%%%%%%%%%
+
+% define item label
+\def\namedlabel#1#2{\begingroup
+	#2%
+	\def\@currentlabel{#2}%
+	\phantomsection\label{#1}\endgroup
+}
+
+% setup ordered list
+%\renewcommand{\labelenumi}{(\alph{enumi})}
+%\renewcommand{\labelenumii}{(\roman{enumii})}
+%\renewcommand{\labelenumiii}{(\Alph{enumii})}
+%\renewcommand{\labelenumiv}{(\Roman{enumii})}
+
+% setup ordered list
+\setlist[enumerate,1]{wide = 0pt, labelwidth = 1.5em, labelsep*=0em, leftmargin = \dimexpr\labelwidth + \labelsep\relax, label=(\alph*), ref=(\alph*)}
+\setlist[enumerate,2]{wide = 0pt, labelwidth = 2em, labelsep*=0em, leftmargin = \dimexpr\labelwidth + \labelsep\relax, label=(\roman*), ref=(\roman*)}
+\setlist[enumerate,3]{wide = 0pt, labelwidth = 2em, labelsep*=0em, leftmargin = \dimexpr\labelwidth + \labelsep\relax, label=(\Alph*), ref=(\Alph*)}
+\setlist[enumerate,4]{wide = 0pt, labelwidth = 2em, labelsep*=0em, leftmargin = \dimexpr\labelwidth + \labelsep\relax, label=(\Roman*), ref=(\Roman*)}
+
+% begin enumerate list, default spacing
+\newcommand{\listbegin}{
+	\begin{enumerate}[parsep=0pt, itemsep=1pc]
+}	
+
+% begin list, no spacing before the list
+\newcommand{\listbeginx}{
+	\begin{enumerate}[topsep=0pt, parsep=0pt, itemsep=1pc]
+	}	
+	
+% close enumerate		
+\newcommand{\listclose}{
+\end{enumerate}
+}
+	
+%% PAGE NUMBER %%
+% display next page
+\newcommand{\nextpage}{%	
+	\vfill \hfill 
+	\ldots\the\numexpr\value{page}+1\relax/-
+}
+
+% setting end of paper
+\newcommand{\paperend}{
+	\centering\bfseries 
+	\vspace{\stretch{1}}
+	-oooOooo-\begingroup\fontsize{0.15pt}{1pt}\selectfont Template by: Mohd Hanafi Mat Som, D.Eng\endgroup	
+	\vspace{\stretch{1}}\\
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TODO TRANSLATION NUMBER IN MALAY %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\RequirePackage[malay,english]{babel}
+\RequirePackage{xstring}
+
+% define last page
+\def\thelastpage{\zref@extract{LastPage}{page}}
+\def\thelastpageSTR{\NUMBERstringnum{\thelastpage}}
+ 
+% translation of the last page up to 30 pages
+\newcommand{\subnumstr}{
+	\bfseries
+	\IfEqCase{\thelastpage}{
+		{1}{SATU}{2}{DUA}{3}{TIGA}{4}{EMPAT}{5}{LIMA}%
+		{6}{ENAM}{7}{TUJUH}{8}{LAPAN}{9}{SEMBILAN}{10}{SEPULUH}%
+		{11}{SEBELAS}{12}{DUA BELAS}{13}{TIGA BELAS}{14}{EMPAT BELAS}{15}{LIMA BELAS}%
+		{16}{ENAM BELAS}{17}{TUJUH BELAS}{18}{LAPAN BELAS}{19}{SEMBILAN BELAS}{20}{DUA PULUH}%
+		{21}{DUA PULUH SATU}{22}{DUA PULUH DUA}{23}{DUA PULUH TIGA}{24}{DUA PULUH EMPAT}{25}{DUA PULUH LIMA}%
+		{26}{DUA PULUH ENAM}{27}{DUA PULUH TUJUH}{28}{DUA PULUH LAPAN}{29}{DUA PULUH SEMBILAN}{30}{TIGA PULUH}%
+	}[\@pagesbm]%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO COVER PAGE INPUT %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pertengahan Akhir
+\def\mtefe#1{\gdef\@mtefe{#1}}
+\def\@mtefe{\@latex@warning@no@line{No \noexpand\mtefe given}}
+
+% Semester
+\def\semester#1{\gdef\@semester{#1}}
+\def\@semester{\@latex@warning@no@line{No \noexpand\semester given}}
+
+%% Academic Session
+\def\sidang#1{\gdef\@sidang{#1}}
+\def\@sidang{\@latex@warning@no@line{No \noexpand\sidang given}}
+
+%% Exam Month Year
+\def\examMonthYear#1{\gdef\@examMonthYear{#1}}
+\def\@examMonthYear{\@latex@warning@no@line{No \noexpand\examMonthYear given}}
+
+%% Course
+\def\courseCode#1{\gdef\@courseCode{#1}}
+\def\@courseCode{\@latex@warning@no@line{No \noexpand\courseCode given}}
+
+%% Course Name English
+\def\courseNameEn#1{\gdef\@courseNameEn{#1}}
+\def\@courseNameEn{\@latex@warning@no@line{No \noexpand\courseNameEn given}}
+
+%% Course Name Malay
+\def\courseNameBM#1{\gdef\@courseNameBM{#1}}
+\def\@courseNameBM{\@latex@warning@no@line{No \noexpand\courseNameBM given}}
+
+%% Duration
+\def\durationhr#1{\gdef\@durationhr{#1}}
+\def\@durationhr{\@latex@warning@no@line{No \noexpand\durationhr given}}
+
+\if@minutes
+\def\durationmin#1{\gdef\@durationmin{#1}}
+\def\@durationmin{\@latex@warning@no@line{No \noexpand\durationmin given}}
+\fi
+
+%% PagesEn
+%\def\pagesen#1{\gdef\@pagesen{#1}}
+%\def\@pagesen{\@latex@warning@no@line{No \noexpand\pagesen given}}
+
+%% PagesBM
+\def\pagesbm#1{\gdef\@pagesbm{#1}}
+\def\@pagesbm{\@latex@warning@no@line{No \noexpand\pagesbm given}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%TODO MAKE TITLE COVER %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\makecover}{
+	\newgeometry{left=2.54cm,right=2.54cm,top=2.54cm,bottom=3.17cm}
+	\pagestyle{titlestyle}
+	\vspace*{5\baselineskip}
+	\hrule \vspace*{3\baselineskip}
+	\begin{center}
+		\textbf{\fontsize{14pt}{\baselineskip}\selectfont UNIVERSITI MALAYSIA PERLIS}\\[\baselineskip]
+		Peperiksaan \@mtefe~Semester \@semester\\
+		Sidang Akademik \@sidang\\[\baselineskip]
+		\@examMonthYear \\[\baselineskip]
+		\textbf{\fontsize{14pt}{\baselineskip}\selectfont \@courseCode~--~\@courseNameEn }\\
+		\textbf{[\@courseNameBM]} \\[\baselineskip]
+		\if@answer
+			\textbf{ANSWER SCHEME}\\[2\baselineskip]		
+		\else
+			Masa: \@durationhr~
+			\if@minutes
+				{\@durationmin}
+			\fi\\[2\baselineskip]
+		\fi 		
+		\hrule \vspace*{\baselineskip}
+	\end{center}
+	
+	Please make sure that this question paper has \textbf{\thelastpageSTR~(\thelastpage)} printed pages including this front page before you start the examination.%
+	
+	\translation{%
+		Sila pastikan kertas soalan ini mengandungi\textbf{\subnumstr~(\thelastpage)}%
+		~muka  surat yang bercetak termasuk muka hadapan sebelum anda memulakan peperiksaan ini.%
+	}\bigskip
+}
+%%
+%% 
+\endinput
+%%
+%% End of file `finalxm.sty'.

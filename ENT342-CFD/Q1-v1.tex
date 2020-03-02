@@ -1,0 +1,62 @@
+%\setmainstyle
+%\vskip -2em		% adjust vertical space skip accordingly 
+
+%%%%%%%%%%%%%
+%%% PART  %%%
+%%%%%%%%%%%%%
+%\textbf{Answer all questions} 
+%
+%\translationbf{Jawab semua soalan}
+%\bigskip
+%\newparten{Answer all questions}
+
+%\newpartbm{Jawab semua soalan}
+
+
+%%%%%%%%%%%%%%%%%%
+%%% QUESTION 1 %%%
+%%%%%%%%%%%%%%%%%%
+%TODO Question1
+%\bigskip 
+
+\question{}[\label{q1}]
+
+The governing equations for inviscid compressible flow is the Euler equations. The equations can be derived from three conservations principle which are the mass conservation, momentum conservation and energy conservation. The principles can be easily demonstrated for one-dimensional flow. Answer the questions below regarding the one-dimensional Euler equations.
+
+\listbeginx	% start 1st level question
+	\item \label{item:q1a} Explain the three principle of conservations and their relations to the control volume analysis. Sketch a suitable control volume for your explanation.
+	
+	\translation{Jelaskan tiga prinsip keabadian itu dan hubungannya dalam analisa isipadu kawalan. Lakarkan rajah isipadu kawalan yang sesuai untuk penjelasan anda.} 
+
+\qmarks{10}	
+	
+	\item \label{item:q1b} Using the conclusions from Q\ref{q1}\ref{item:q1a}, prove that the one-dimensional Euler equations can be written in the form below. Here, $\rho$, $u$, $p$, $e$ are density, x-axis velocity, pressure and total energy, respectively.
+		
+		\translation{Dengan menggunakan kesimpulan daripada Q\ref{q1}\ref{item:q1a},buktikan bahawa persamaan Euler satu dimensi boleh ditulis dalam bentuk dibawah. Disini, $\rho$, $u$, $p$, $e$ adalah masing-masingnya ketumpatan, halaju pada paksi-x, tekanan dan tenaga keseluruhan.  }
+	
+	\begin{equation}
+	\frac{\partial \textbf{Q} }{\partial t} + \frac{\partial \textbf{E}}{\partial x} = 0 \nonumber
+	\end{equation}
+	
+	\begin{equation}
+	\textbf{Q} = \begin{bmatrix}
+	\rho \\ \rho u^2 \\ e
+	\end{bmatrix}    \nonumber
+\end{equation}
+
+\begin{equation}	
+	\textbf{E} = \begin{bmatrix}
+\rho u^2 \\ \rho u^2 + p \\ (e+p)u
+\end{bmatrix}	\nonumber
+	\end{equation}
+		
+		
+		\qmarks{10}
+
+\item There are four (4) unknown variables in the equations from Q\ref{q1}\ref{item:q1b} but only three (3) equations, meaning that the system needs another equation to close it. The pressure $p$ and total energy $e$ are linked together by the state equation of ideal gas. Explain and derive the relation.
+
+\translation{Terdapat empat (4) anu dalam kesemua persamaan daripada Q\ref{q1}\ref{item:q1b} tetapi cuma tiga (3) persamaan, bermakna sistem persamaan ini memerlukan satu lagi persamaan untuk dipenuhi. Tekanan $p$ dan tenaga keseluruhan $e$ adalah berkaitan dengan persamaan keadaan untuk gas unggul. Jelaskan dan terbitkan hubungan itu.  }		
+		
+		\qmarks{5}
+\listclose % close 1st level question
+
