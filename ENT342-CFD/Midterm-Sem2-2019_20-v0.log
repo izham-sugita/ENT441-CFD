@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.29)  2 MAR 2020 10:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.11.29)  5 MAR 2020 18:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**StandardStyleENT342CFD.tex
-(./StandardStyleENT342CFD.tex
+**Midterm-Sem2-2019_20-v0.tex
+(./Midterm-Sem2-2019_20-v0.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 9 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -1367,8 +1367,8 @@ Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
 \c@lips@count=\count310
 )
-(./StandardStyleENT342CFD.aux)
-\openout1 = `StandardStyleENT342CFD.aux'.
+(./Midterm-Sem2-2019_20-v0.aux)
+\openout1 = `Midterm-Sem2-2019_20-v0.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
 LaTeX Font Info:    ... okay on input line 59.
@@ -1473,9 +1473,9 @@ LaTeX Info: Redefining \ref on input line 59.
 LaTeX Info: Redefining \pageref on input line 59.
 LaTeX Info: Redefining \nameref on input line 59.
 
-(./StandardStyleENT342CFD.out) (./StandardStyleENT342CFD.out)
+(./Midterm-Sem2-2019_20-v0.out) (./Midterm-Sem2-2019_20-v0.out)
 \@outlinefile=\write4
-\openout4 = `StandardStyleENT342CFD.out'.
+\openout4 = `Midterm-Sem2-2019_20-v0.out'.
 
 \c__siunitx_mathsf_int=\count318
 LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 59
@@ -1665,21 +1665,21 @@ Package atveryend Info: Empty hook `BeforeClearDocument' on input line 135.
 
 ]
 Package atveryend Info: Executing hook `AfterLastShipout' on input line 135.
- (./StandardStyleENT342CFD.aux)
+ (./Midterm-Sem2-2019_20-v0.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 135.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 135.
-Package rerunfilecheck Info: File `StandardStyleENT342CFD.out' has not changed.
-
+Package rerunfilecheck Info: File `Midterm-Sem2-2019_20-v0.out' has not changed
+.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
  23595 strings out of 494805
- 440478 string characters out of 6177999
- 597734 words of memory out of 5000000
+ 440491 string characters out of 6177999
+ 597754 words of memory out of 5000000
  26562 multiletter control sequences out of 15000+600000
  599289 words of font info for 135 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
- 60i,11n,94p,10486b,872s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,11n,94p,10487b,872s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
@@ -1691,7 +1691,7 @@ re/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on StandardStyleENT342CFD.pdf (7 pages, 480956 bytes).
+Output written on Midterm-Sem2-2019_20-v0.pdf (7 pages, 480045 bytes).
 PDF statistics:
  169 PDF objects out of 1000 (max. 8388607)
  146 compressed objects within 2 object streams
