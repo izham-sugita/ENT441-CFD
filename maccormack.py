@@ -10,47 +10,41 @@ plt.rcParams["figure.figsize"] = fig_size
 imax = 1001
 dx = 10.0/(imax-1)
 u = np.ndarray((imax),dtype=np.float64)
+un = np.ndarray((imax),dtype=np.float64)
+u1 = np.ndarray((imax),dtype=np.float64)
 x = np.ndarray((imax),dtype=np.float64)
 
 for i in range(imax):
     x[i] = i*dx
     u[i] = 0.0
-    if x[i] > 2.0 and x[i] < 4.0:
+    if x[i] > 4.0 and x[i] < 6.0:
         u[i] = 1.0
 
-'''
-plt.plot(x, u, 'ko-')
-plt.title('Initial condition')
-plt.ylabel('u')
-plt.show()
-'''
-
-u1 = u
-u2 = u
-un = u #initiate new value for u
+        
+#copy value; not the same object
+u1[:] = u[:]
+un[:] = u[:] 
 dt = np.float64(input("Enter dt, dx=%s\n  "%dx ))
 
 itermax = int( 1.0/dt ) 
 
 c = 1.0
-alpha = 0.5*c*dt/dx
-beta = ( 0.5*c*dt/dx )
-g1 = 0.5
-g2 = 0.5
-eps = 1.0e-4
+c = float( input("Enter c, -1.0 or 1.0:\n") )
+
+alpha = c*dt/dx
 
 for iter in range(itermax):
 
     for i in range(1,imax-1):
         
-        u1[i] = u[i] - c*(dt/dx)*(u[i] - u[i-1] )
+        u1[i] = u[i] - alpha*(u[i] - u[i-1] )
 
     for i in range(1,imax-1):
         
-        un[i] = 0.5*( u[i] + u1[i] ) - 0.5*c*(dt/dx)*( u1[i+1] - u1[i] )
+        un[i] = 0.5*( u[i] + u1[i] ) - 0.5*alpha*( u1[i+1] - u1[i] )
 
-    #update
-    u = un
+    #update by copying value
+    u[:] = un[:]
     current = iter*dt + dt
     display = "t = %.4f"%(current)
     plt.axis([0.0, 10.0, -0.5, 1.5 ] )
@@ -62,7 +56,6 @@ for iter in range(itermax):
     plt.clf() #clear drawing
     
 
-#filename= "t%.2f"%(current) + ".png"
 filename = "final.png"
 plt.axis([0.0, 10.0, -0.5, 1.5 ] )
 plt.plot(x,u, 'bo-')
